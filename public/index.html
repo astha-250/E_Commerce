@@ -1,0 +1,2083 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Online Shopping System</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- ==========================================
+     NAVIGATION
+=========================================== -->
+
+    <nav class="navbar">
+
+        <div class="logo" onclick="showSection('home')">
+            🛒 ShopEase
+        </div>
+
+
+        <ul class="nav-links">
+
+            <li>
+                <button onclick="showSection('home')">
+                    Home
+                </button>
+            </li>
+            <li>
+                <button onclick="showSection('adminlogin')">
+                    Admin Login
+                </button>
+            </li>
+
+
+            <li>
+                <button onclick="showSection('products')">
+                    Products
+                </button>
+            </li>
+
+            <li>
+                <button onclick="showSection('customer')">
+                    Customer
+                </button>
+            </li>
+
+            <li>
+                <button onclick="showSection('cart')">
+                    🛒 Cart
+                </button>
+            </li>
+
+            <li>
+                <button id="loginNavButton" class="login-nav-button" type="button" onclick="showSection('login')"
+                    aria-label="Open customer login">
+                    🔐 Login / Register
+                </button>
+            </li>
+
+
+
+        </ul>
+
+    </nav>
+
+
+
+    <!-- ==========================================
+     HOME SECTION
+=========================================== -->
+
+    <section id="home" class="section active">
+
+        <div class="hero">
+
+            <h1>
+                Welcome to Online Shopping
+            </h1>
+
+            <p>
+                Shop your favourite products,
+                manage your account and enjoy
+                a simple online shopping experience.
+            </p>
+
+
+            
+            <div class="hero-buttons">
+
+                <!-- Customer Login: visible before login -->
+                <button id="customerLoginButton" class="btn btn-secondary" type="button" onclick="showSection('login')">
+                    🔐 Customer Login / Register
+                </button>
+
+                <!-- Admin Login: always separate -->
+                <button id="adminLoginButton" class="btn btn-secondary" type="button"
+                    onclick="showSection('adminLogin')">
+                    🔑 Admin Login
+                </button>
+
+                <!-- Start Shopping: shown only after customer login -->
+                <button id="startShoppingButton" class="btn btn-primary" type="button" onclick="showSection('products')"
+                    style="display: none;">
+                    🛍 Start Shopping
+                </button>
+
+            </div>
+            
+
+
+            <div class="option-grid">
+
+
+                <div class="option-card" onclick="showSection('customer')">
+
+                    <div class="option-icon">
+                        👤
+                    </div>
+
+                    <h3>
+                        Customer
+                    </h3>
+
+                    <p>
+                        Register and manage
+                        your customer account.
+                    </p>
+
+                </div>
+
+
+                <div class="option-card" onclick="showSection('products')">
+
+                    <div class="option-icon">
+                        🛍️
+                    </div>
+
+                    <h3>
+                        Products
+                    </h3>
+
+                    <p>
+                        Browse available products
+                        and add them to your cart.
+                    </p>
+
+                </div>
+
+
+                <div class="option-card" onclick="showSection('cart')">
+
+                    <div class="option-icon">
+                        🛒
+                    </div>
+
+                    <h3>
+                        Shopping Cart
+                    </h3>
+
+                    <p>
+                        View products added
+                        to your shopping cart.
+                    </p>
+
+                </div>
+
+
+                <div class="option-card" onclick="showSection('admin')">
+
+                    <div class="option-icon">
+                        ⚙️
+                    </div>
+
+                    <h3>
+                        Admin
+                    </h3>
+
+                    <p>
+                        Manage products and
+                        system records.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==========================================
+     CUSTOMER SECTION
+=========================================== -->
+
+    <section id="customer" class="section">
+
+        <h2 class="section-title">
+            Customer
+        </h2>
+
+        <p class="section-subtitle">
+            Register a new account or view registered customers.
+        </p>
+
+
+        <div class="customer-buttons">
+
+            <button class="btn btn-primary" onclick="showCustomerForm()">
+                👤 Register Customer
+            </button>
+
+            <button class="btn btn-secondary" onclick="loadCustomers()">
+                📋 View Customers
+            </button>
+
+        </div>
+
+
+        <!-- CUSTOMER REGISTRATION -->
+
+        <div id="customerFormContainer" class="form-container" style="display:none;">
+
+            <h2 style="margin-bottom:25px;">
+                Customer Registration
+            </h2>
+
+
+            <form id="customerForm">
+
+
+                <div class="form-group">
+
+                    <label>
+                        User Name
+                    </label>
+
+                    <input type="text" id="User_Name" required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Password
+                    </label>
+
+                    <input type="password" id="Customer_Password" required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Mobile Number
+                    </label>
+
+                    <input type="text" id="Mobile_Number" maxlength="15">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Email Address
+                    </label>
+
+                    <input type="email" id="Email_Address">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Country
+                    </label>
+
+                    <input type="text" id="Country">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        District
+                    </label>
+
+                    <input type="text" id="District" required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Address
+                    </label>
+
+                    <textarea id="Address" rows="3" required></textarea>
+
+                </div>
+
+
+                <div class="form-actions">
+
+                    <button type="submit" class="btn btn-success">
+                        Register
+                    </button>
+
+                    <button type="button" class="btn btn-light" onclick="hideCustomerForm()">
+                        Cancel
+                    </button>
+
+                </div>
+
+
+            </form>
+
+
+            <div id="customerMessage" class="message"></div>
+
+        </div>
+
+
+        <!-- CUSTOMER TABLE -->
+
+        <div id="customerList" style="display:none; margin-top:35px;">
+
+            <h2 style="margin-bottom:20px;">
+                Registered Customers
+            </h2>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>ID</th>
+
+                            <th>Username</th>
+
+                            <th>Mobile</th>
+
+                            <th>Email</th>
+
+                            <th>Country</th>
+
+                            <th>District</th>
+
+                            <th>Address</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="customerTable">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==========================================
+     LOGIN SECTION
+=========================================== -->
+
+    <section id="login" class="section">
+
+        <h2 class="section-title">
+            Customer Login
+        </h2>
+
+        <p class="section-subtitle">
+            Login to add products to your shopping cart.
+        </p>
+
+
+        <div class="form-container">
+
+            <form id="loginForm">
+
+
+                <div class="form-group">
+
+                    <label>
+                        Username
+                    </label>
+
+                    <input type="text" id="login_User_Name" required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Password
+                    </label>
+
+                    <input type="password" id="login_Password" required>
+
+                </div>
+
+
+                <button type="submit" class="btn btn-primary">
+                    Login
+                </button>
+
+
+            </form>
+
+
+            <div id="loginMessage" class="message"></div>
+
+
+            <div id="loggedInUser" style="
+                display:none;
+                margin-top:20px;
+                padding:15px;
+                background:#dcfce7;
+                border-radius:8px;
+                color:#166534;
+            ">
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==========================================
+     PRODUCTS SECTION
+=========================================== -->
+
+    <section id="products" class="section">
+
+        <h2 class="section-title">
+            Available Products
+        </h2>
+
+        <p class="section-subtitle">
+            Browse products and add them to your cart.
+        </p>
+
+
+        <!-- QUANTITY -->
+
+        <div class="product-top">
+
+            <div class="quantity-box">
+
+                <label>
+                    Quantity:
+                </label>
+
+                <input type="number" id="cartQuantity" value="1" min="1">
+
+            </div>
+
+
+            <button class="btn btn-success" onclick="showProductForm()">
+                + Add New Product
+            </button>
+
+        </div>
+
+
+        <!-- ADD PRODUCT FORM -->
+
+        <div id="productFormContainer" class="form-container" style="display:none; margin-bottom:35px;">
+
+            <h2 id="productFormTitle" style="margin-bottom:25px;">
+                Add New Product
+            </h2>
+
+
+            <form id="productForm">
+
+
+                <div class="form-group">
+
+                    <label>
+                        Product ID
+                    </label>
+
+                    <input type="number" id="Product_ID" required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Product Name
+                    </label>
+
+                    <input type="text" id="P_Name" required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Category
+                    </label>
+
+                    <input type="text" id="P_Category">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Price
+                    </label>
+
+                    <input type="number" step="0.01" id="P_Price">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Availability
+                    </label>
+
+                    <select id="P_Availability">
+
+                        <option value="Available">
+                            Available
+                        </option>
+
+                        <option value="Unavailable">
+                            Unavailable
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Admin ID
+                    </label>
+
+                    <input type="number" id="A_ID">
+
+                </div>
+
+
+                <div class="form-actions">
+
+                    <button type="submit" class="btn btn-success">
+                        Save Product
+                    </button>
+
+                    <button type="button" class="btn btn-light" onclick="hideProductForm()">
+                        Cancel
+                    </button>
+
+                </div>
+
+
+            </form>
+
+
+            <div id="productMessage" class="message"></div>
+
+        </div>
+
+
+        <!-- PRODUCTS -->
+
+        <div id="productGrid" class="product-grid">
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==========================================
+     SHOPPING CART SECTION
+=========================================== -->
+
+    <section id="cart" class="section">
+
+        <h2 class="section-title">
+            🛒 My Shopping Cart
+        </h2>
+
+        <p class="section-subtitle">
+            View products added to your cart.
+        </p>
+
+
+        <div class="cart-container">
+
+            <div id="cartLoginMessage" style="
+                display:none;
+                background:#fef3c7;
+                color:#92400e;
+                padding:15px;
+                border-radius:8px;
+                margin-bottom:20px;
+            ">
+                Please login to view your cart.
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Cart ID
+                            </th>
+
+                            <th>
+                                Product ID
+                            </th>
+
+                            <th>
+                                Product Name
+                            </th>
+
+                            <th>
+                                Quantity
+                            </th>
+
+                            <th>
+                                Total Price
+                            </th>
+
+                            <th>
+                                Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="cartTable">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            <div id="cartTotal" class="cart-total">
+                Grand Total: ₹0.00
+            </div>
+
+
+        </div>
+
+    </section>
+
+    <!-- ==========================================
+     ADMIN LOGIN SECTION
+=========================================== -->
+
+    <section id="adminLogin" class="section">
+
+        <h2 class="section-title">Admin Login</h2>
+
+        <p class="section-subtitle">
+            Login with your administrator credentials.
+        </p>
+
+        <div class="form-container">
+
+            <form id="adminLoginForm">
+
+                <div class="form-group">
+                    <label for="adminUsername">Admin Username</label>
+                    <input type="text" id="adminUsername" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="adminPassword">Password</label>
+                    <input type="password" id="adminPassword" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary">
+                    Login as Admin
+                </button>
+
+            </form>
+
+            <div id="adminLoginMessage" class="message"></div>
+
+        </div>
+
+    </section>
+
+    <!-- ==========================================
+     ADMIN SECTION
+=========================================== -->
+
+    <section id="admin" class="section">
+
+        <h2 class="section-title">
+            ⚙️ Admin Dashboard
+        </h2>
+
+        <p class="section-subtitle">
+            Manage the online shopping system.
+        </p>
+
+
+        <div class="admin-grid">
+
+
+            <div class="admin-card" onclick="showSection('products')">
+
+                <div class="icon">
+                    🛍️
+                </div>
+
+                <h3>
+                    Manage Products
+                </h3>
+
+                <p>
+                    Add, edit and delete products.
+                </p>
+
+            </div>
+
+
+            <div class="admin-card" onclick="showSection('customer')">
+
+                <div class="icon">
+                    👥
+                </div>
+
+                <h3>
+                    Customers
+                </h3>
+
+                <p>
+                    View registered customers.
+                </p>
+
+            </div>
+
+
+            <div class="admin-card" onclick="showSection('cart')">
+
+                <div class="icon">
+                    🛒
+                </div>
+
+                <h3>
+                    Shopping Carts
+                </h3>
+
+                <p>
+                    View customer cart information.
+                </p>
+
+            </div>
+
+
+            <div class="admin-card">
+
+                <div class="icon">
+                    📦
+                </div>
+
+                <h3>
+                    Purchases
+                </h3>
+
+                <p>
+                    Purchase management will be added next.
+                </p>
+
+            </div>
+
+
+            <div class="admin-card">
+
+                <div class="icon">
+                    🚚
+                </div>
+
+                <h3>
+                    Deliveries
+                </h3>
+
+                <p>
+                    Delivery management will be added next.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==========================================
+     FOOTER
+=========================================== -->
+
+    <footer>
+
+        <p>
+            © 2026 Online Shopping System
+        </p>
+
+    </footer>
+
+
+
+    <script>
+
+
+        /* =========================================
+           SECTION NAVIGATION
+        ========================================= */
+
+
+        function showSection(sectionId) {
+            const isCustomerLoggedIn = Boolean(localStorage.getItem("C_ID"));
+
+            // Prevent shopping and cart access before customer login
+            if (
+                (sectionId === "products" || sectionId === "cart") &&
+                !isCustomerLoggedIn
+            ) {
+                alert("Please log in with your customer credentials before shopping.");
+                sectionId = "login";
+            }
+
+            // Hide all sections
+            document.querySelectorAll(".section").forEach(section => {
+                section.classList.remove("active");
+            });
+
+            // Display the selected section
+            const selectedSection = document.getElementById(sectionId);
+
+            if (selectedSection) {
+                selectedSection.classList.add("active");
+
+                // Scroll smoothly to the selected section
+                selectedSection.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+            }
+
+            updateAuthButtons();
+
+            // Load data only when the customer opens these sections
+            if (sectionId === "products" && isCustomerLoggedIn) {
+                loadProducts();
+            }
+
+            if (sectionId === "cart" && isCustomerLoggedIn) {
+                loadCart();
+            }
+        }
+
+
+
+        function updateAuthButtons() {
+            const isLoggedIn = Boolean(localStorage.getItem("C_ID"));
+
+            const loginButton = document.getElementById("customerLoginButton");
+            const adminLoginButton = document.getElementById("adminLoginButton");
+            const shoppingButton = document.getElementById("startShoppingButton");
+
+            if (loginButton) {
+                loginButton.style.display = isLoggedIn ? "none" : "inline-block";
+            }
+
+            if (adminLoginButton) {
+                adminLoginButton.style.display = "inline-block";
+            }
+
+            if (shoppingButton) {
+                shoppingButton.style.display = isLoggedIn ? "inline-block" : "none";
+            }
+        }
+
+
+
+        // Set the correct home-page buttons when the page first loads.
+        document.addEventListener("DOMContentLoaded", updateAuthButtons);
+
+
+        /* =========================================
+           CUSTOMER FORM
+        ========================================= */
+
+        function showCustomerForm() {
+
+            document.getElementById(
+                "customerFormContainer"
+            ).style.display = "block";
+
+        }
+
+
+        function hideCustomerForm() {
+
+            document.getElementById(
+                "customerFormContainer"
+            ).style.display = "none";
+
+        }
+
+
+
+        /* =========================================
+           CUSTOMER REGISTRATION
+        ========================================= */
+
+        document
+            .getElementById("customerForm")
+            .addEventListener(
+                "submit",
+                function (event) {
+
+                    event.preventDefault();
+
+
+                    const customer = {
+
+                        User_Name:
+                            document.getElementById(
+                                "User_Name"
+                            ).value,
+
+                        Password:
+                            document.getElementById(
+                                "Customer_Password"
+                            ).value,
+
+                        Mobile_Number:
+                            document.getElementById(
+                                "Mobile_Number"
+                            ).value,
+
+                        Email_Address:
+                            document.getElementById(
+                                "Email_Address"
+                            ).value,
+
+                        Country:
+                            document.getElementById(
+                                "Country"
+                            ).value,
+
+                        District:
+                            document.getElementById(
+                                "District"
+                            ).value,
+
+                        Address:
+                            document.getElementById(
+                                "Address"
+                            ).value
+
+                    };
+
+
+                    fetch("/customers", {
+
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body:
+                            JSON.stringify(customer)
+
+                    })
+
+                        .then(response =>
+                            response.json()
+                        )
+
+                        .then(data => {
+
+                            const message =
+                                document.getElementById(
+                                    "customerMessage"
+                                );
+
+
+                            if (data.success) {
+
+                                message.className =
+                                    "message success";
+
+                                message.innerHTML =
+                                    data.message +
+                                    "<br>Customer ID: " +
+                                    data.C_ID;
+
+
+                                document
+                                    .getElementById(
+                                        "customerForm"
+                                    )
+                                    .reset();
+
+
+                                loadCustomers();
+
+                            }
+
+                            else {
+
+                                message.className =
+                                    "message error";
+
+                                message.innerHTML =
+                                    data.message;
+
+                            }
+
+                        })
+
+                        .catch(error => {
+
+                            console.error(
+                                "Customer registration error:",
+                                error
+                            );
+
+                        });
+
+                }
+            );
+
+
+
+        /* =========================================
+           LOAD CUSTOMERS
+        ========================================= */
+
+        function loadCustomers() {
+
+            document.getElementById(
+                "customerList"
+            ).style.display = "block";
+
+
+            fetch("/customers")
+
+                .then(response =>
+                    response.json()
+                )
+
+                .then(customers => {
+
+                    const table =
+                        document.getElementById(
+                            "customerTable"
+                        );
+
+
+                    table.innerHTML = "";
+
+
+                    customers.forEach(customer => {
+
+                        const row =
+                            document.createElement("tr");
+
+
+                        row.innerHTML = `
+
+                    <td>
+                        ${customer.C_ID}
+                    </td>
+
+                    <td>
+                        ${customer.User_Name}
+                    </td>
+
+                    <td>
+                        ${customer.Mobile_Number || ""}
+                    </td>
+
+                    <td>
+                        ${customer.Email_Address || ""}
+                    </td>
+
+                    <td>
+                        ${customer.Country || ""}
+                    </td>
+
+                    <td>
+                        ${customer.District || ""}
+                    </td>
+
+                    <td>
+                        ${customer.Address || ""}
+                    </td>
+
+                `;
+
+
+                        table.appendChild(row);
+
+                    });
+
+                })
+
+                .catch(error => {
+
+                    console.error(
+                        "Error loading customers:",
+                        error
+                    );
+
+                });
+
+        }
+
+
+
+        /* =========================================
+           LOGIN
+        ========================================= */
+
+        document
+            .getElementById("loginForm")
+            .addEventListener(
+                "submit",
+                function (event) {
+
+                    event.preventDefault();
+
+
+                    const loginData = {
+
+                        User_Name:
+                            document.getElementById(
+                                "login_User_Name"
+                            ).value,
+
+                        Password:
+                            document.getElementById(
+                                "login_Password"
+                            ).value
+
+                    };
+
+
+                    fetch("/login", {
+
+                        method: "POST",
+
+                        headers: {
+
+                            "Content-Type":
+                                "application/json"
+
+                        },
+
+                        body:
+                            JSON.stringify(loginData)
+
+                    })
+
+                        .then(response =>
+                            response.json()
+                        )
+
+                        .then(data => {
+
+                            const message =
+                                document.getElementById(
+                                    "loginMessage"
+                                );
+
+
+                            if (data.success) {
+
+                                message.className =
+                                    "message success";
+
+                                message.innerHTML =
+                                    data.message;
+
+
+                                if (data.token) {
+                                    localStorage.setItem("token", data.token);
+                                }
+
+                                localStorage.setItem(
+                                    "C_ID",
+                                    data.C_ID
+                                );
+
+
+                                localStorage.setItem(
+                                    "User_Name",
+                                    data.User_Name
+                                );
+
+
+                                document.getElementById(
+                                    "loggedInUser"
+                                ).style.display = "block";
+
+
+                                document.getElementById(
+                                    "loggedInUser"
+                                ).innerHTML =
+
+                                    "👤 Logged in as <strong>" +
+                                    data.User_Name +
+                                    "</strong><br>" +
+
+                                    "Customer ID: " +
+                                    data.C_ID;
+
+                                // Login succeeded: update the home buttons and open products.
+                                updateAuthButtons();
+                                showSection("products");
+
+                            }
+
+                            else {
+
+                                message.className =
+                                    "message error";
+
+                                message.innerHTML =
+                                    data.message;
+
+                            }
+
+                        })
+
+                        .catch(error => {
+
+                            console.error(
+                                "Login error:",
+                                error
+                            );
+
+                        });
+
+                }
+            );
+        // ==========================================
+        // ADMIN LOGIN FORM
+        // ==========================================
+
+        document.getElementById("adminLoginForm")
+            .addEventListener("submit", async function (event) {
+                event.preventDefault();
+
+                const User_Name = document
+                    .getElementById("adminUsername")
+                    .value.trim();
+
+                const Password = document
+                    .getElementById("adminPassword")
+                    .value;
+
+                const message = document.getElementById("adminLoginMessage");
+
+                message.textContent = "Verifying credentials...";
+                message.className = "message";
+
+                try {
+                    const response = await fetch("/admin/login", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            User_Name,
+                            Password
+                        })
+                    });
+
+                    const data = await response.json();
+
+                    if (!response.ok || !data.success) {
+                        message.textContent =
+                            data.message || "Admin login failed.";
+                        message.className = "message error";
+                        return;
+                    }
+
+                    localStorage.setItem("adminToken", data.token);
+                    localStorage.setItem("adminId", data.A_ID);
+
+                    message.textContent = "Admin login successful!";
+                    message.className = "message success";
+
+                    document.getElementById("adminLoginForm").reset();
+
+                    setTimeout(() => {
+                        showSection("admin");
+                    }, 500);
+
+                } catch (error) {
+                    console.error("Admin login error:", error);
+                    message.textContent =
+                        "Unable to connect to the server. Please try again.";
+                    message.className = "message error";
+                }
+            });
+
+
+
+
+
+        /* =========================================
+           PRODUCT FORM
+        ========================================= */
+
+        let editingProductId = null;
+
+
+        function showProductForm() {
+
+            editingProductId = null;
+
+
+            document.getElementById(
+                "productFormTitle"
+            ).innerText =
+                "Add New Product";
+
+
+            document.getElementById(
+                "productFormContainer"
+            ).style.display =
+                "block";
+
+
+            document.getElementById(
+                "productForm"
+            ).reset();
+
+
+            document.getElementById(
+                "Product_ID"
+            ).disabled = false;
+
+        }
+
+
+        function hideProductForm() {
+
+            document.getElementById(
+                "productFormContainer"
+            ).style.display =
+                "none";
+
+        }
+
+
+
+        /* =========================================
+           PRODUCT CREATE / UPDATE
+        ========================================= */
+
+        document
+            .getElementById("productForm")
+            .addEventListener(
+                "submit",
+                function (event) {
+
+                    event.preventDefault();
+
+
+                    const product = {
+
+                        Product_ID:
+                            document.getElementById(
+                                "Product_ID"
+                            ).value,
+
+                        P_Name:
+                            document.getElementById(
+                                "P_Name"
+                            ).value,
+
+                        P_Category:
+                            document.getElementById(
+                                "P_Category"
+                            ).value,
+
+                        P_Price:
+                            document.getElementById(
+                                "P_Price"
+                            ).value,
+
+                        P_Availability:
+                            document.getElementById(
+                                "P_Availability"
+                            ).value,
+
+                        A_ID:
+                            document.getElementById(
+                                "A_ID"
+                            ).value
+
+                    };
+
+
+                    let url = "/products";
+
+                    let method = "POST";
+
+
+                    if (editingProductId !== null) {
+
+                        url =
+                            "/products/" +
+                            editingProductId;
+
+                        method = "PUT";
+
+                    }
+
+
+                    fetch(url, {
+
+                        method: method,
+
+                        headers: {
+
+                            "Content-Type":
+                                "application/json"
+
+                        },
+
+                        body:
+                            JSON.stringify(product)
+
+                    })
+
+                        .then(response =>
+                            response.json()
+                        )
+
+                        .then(data => {
+
+                            const message =
+                                document.getElementById(
+                                    "productMessage"
+                                );
+
+
+                            if (data.success) {
+
+                                message.className =
+                                    "message success";
+
+                                message.innerHTML =
+                                    data.message;
+
+
+                                hideProductForm();
+
+                                loadProducts();
+
+                            }
+
+                            else {
+
+                                message.className =
+                                    "message error";
+
+                                message.innerHTML =
+                                    data.message;
+
+                            }
+
+                        })
+
+                        .catch(error => {
+
+                            console.error(
+                                "Product error:",
+                                error
+                            );
+
+                        });
+
+                }
+            );
+
+
+
+        /* =========================================
+           LOAD PRODUCTS
+        ========================================= */
+
+        function loadProducts() {
+
+            fetch("/products")
+
+                .then(response =>
+                    response.json()
+                )
+
+                .then(products => {
+
+                    const grid =
+                        document.getElementById(
+                            "productGrid"
+                        );
+
+
+                    grid.innerHTML = "";
+
+
+                    products.forEach(product => {
+
+                        const card =
+                            document.createElement(
+                                "div"
+                            );
+
+
+                        card.className =
+                            "product-card";
+
+
+                        let availabilityClass =
+                            "available";
+
+
+                        if (
+                            product.P_Availability
+                            !== "Available"
+                        ) {
+
+                            availabilityClass =
+                                "unavailable";
+
+                        }
+
+
+                        card.innerHTML = `
+
+                    <div class="product-image">
+                        🛍️
+                    </div>
+
+
+                    <h3>
+                        ${product.P_Name}
+                    </h3>
+
+
+                    <div class="category">
+                        ${product.P_Category || "General"}
+                    </div>
+
+
+                    <div class="price">
+                        ₹${product.P_Price || "0.00"}
+                    </div>
+
+
+                    <div class="availability">
+
+                        Availability:
+
+                        <span class="${availabilityClass}">
+                            ${product.P_Availability || "Unknown"}
+                        </span>
+
+                    </div>
+
+
+                    <div class="product-actions">
+
+
+                        <button
+                            class="btn btn-warning"
+                            onclick="editProduct(
+                                ${product.Product_ID}
+                            )"
+                        >
+                            Edit
+                        </button>
+
+
+                        <button
+                            class="btn btn-danger"
+                            onclick="deleteProduct(
+                                ${product.Product_ID}
+                            )"
+                        >
+                            Delete
+                        </button>
+
+
+                        <button
+                            class="btn btn-success"
+                            onclick="addToCart(
+                                ${product.Product_ID}
+                            )"
+                        >
+                            Add to Cart
+                        </button>
+
+
+                    </div>
+
+                `;
+
+
+                        grid.appendChild(card);
+
+                    });
+
+                })
+
+                .catch(error => {
+
+                    console.error(
+                        "Error loading products:",
+                        error
+                    );
+
+                });
+
+        }
+
+
+
+        /* =========================================
+           EDIT PRODUCT
+        ========================================= */
+
+        function editProduct(productId) {
+
+            fetch("/products/" + productId)
+
+                .then(response =>
+                    response.json()
+                )
+
+                .then(product => {
+
+                    editingProductId =
+                        product.Product_ID;
+
+
+                    document.getElementById(
+                        "productFormTitle"
+                    ).innerText =
+                        "Edit Product";
+
+
+                    document.getElementById(
+                        "productFormContainer"
+                    ).style.display =
+                        "block";
+
+
+                    document.getElementById(
+                        "Product_ID"
+                    ).value =
+                        product.Product_ID;
+
+
+                    document.getElementById(
+                        "Product_ID"
+                    ).disabled = true;
+
+
+                    document.getElementById(
+                        "P_Name"
+                    ).value =
+                        product.P_Name;
+
+
+                    document.getElementById(
+                        "P_Category"
+                    ).value =
+                        product.P_Category || "";
+
+
+                    document.getElementById(
+                        "P_Price"
+                    ).value =
+                        product.P_Price || "";
+
+
+                    document.getElementById(
+                        "P_Availability"
+                    ).value =
+                        product.P_Availability || "Available";
+
+
+                    document.getElementById(
+                        "A_ID"
+                    ).value =
+                        product.A_ID || "";
+
+                })
+
+                .catch(error => {
+
+                    console.error(
+                        "Error getting product:",
+                        error
+                    );
+
+                });
+
+        }
+
+
+
+        /* =========================================
+           DELETE PRODUCT
+        ========================================= */
+
+        function deleteProduct(productId) {
+
+            const confirmed =
+                window.confirm(
+                    "Are you sure you want to delete this product?"
+                );
+
+
+            if (!confirmed) {
+
+                return;
+
+            }
+
+
+            fetch(
+                "/products/" + productId,
+                {
+                    method: "DELETE"
+                }
+            )
+
+                .then(response =>
+                    response.json()
+                )
+
+                .then(data => {
+
+                    alert(data.message);
+
+                    loadProducts();
+
+                })
+
+                .catch(error => {
+
+                    console.error(
+                        "Error deleting product:",
+                        error
+                    );
+
+                    alert(
+                        "Failed to delete product."
+                    );
+
+                });
+
+        }
+
+
+
+        function addToCart(productId) {
+
+            const customerId =
+                localStorage.getItem("C_ID");
+
+
+            if (!customerId) {
+
+                alert(
+                    "Please login before adding products to cart."
+                );
+
+                showSection("login");
+
+                return;
+
+            }
+
+
+            const quantity =
+                document.getElementById(
+                    "cartQuantity"
+                ).value;
+
+
+            if (quantity < 1) {
+
+                alert(
+                    "Quantity must be at least 1."
+                );
+
+                return;
+
+            }
+
+
+            const cartData = {
+
+                C_ID: customerId,
+
+                Product_ID: productId,
+
+                Quantity: quantity
+
+            };
+
+
+            fetch("/cart", {
+
+                method: "POST",
+
+                headers: {
+
+                    "Content-Type":
+                        "application/json"
+
+                },
+
+                body:
+                    JSON.stringify(cartData)
+
+            })
+
+                .then(response =>
+                    response.json()
+                )
+
+                .then(data => {
+
+                    alert(data.message);
+
+
+                    if (data.success) {
+
+                        showSection("cart");
+
+                    }
+
+                })
+
+                .catch(error => {
+
+                    console.error(
+                        "Error adding to cart:",
+                        error
+                    );
+
+                    alert(
+                        "Failed to add product to cart."
+                    );
+
+                });
+
+        }
+
+
+
+        /* =========================================
+           LOAD CART
+        ========================================= */
+
+        function loadCart() {
+            const customerId = localStorage.getItem("C_ID");
+
+            if (!customerId) {
+                document.getElementById("cartLoginMessage").style.display = "block";
+                document.getElementById("cartTable").innerHTML = "";
+                document.getElementById("cartTotal").innerText = "Grand Total: ₹0.00";
+                return;
+            }
+
+            document.getElementById("cartLoginMessage").style.display = "none";
+
+            fetch("/cart/" + encodeURIComponent(customerId))
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Failed to load cart.");
+                    }
+                    return response.json();
+                })
+                .then(cartItems => {
+                    const table = document.getElementById("cartTable");
+                    table.innerHTML = "";
+
+                    let grandTotal = 0;
+
+                    if (cartItems.length === 0) {
+                        table.innerHTML = `
+                    <tr>
+                        <td colspan="6" style="text-align:center; padding:30px;">
+                            Your cart is empty.
+                        </td>
+                    </tr>
+                `;
+
+                        document.getElementById("cartTotal").innerText =
+                            "Grand Total: ₹0.00";
+                        return;
+                    }
+
+                    cartItems.forEach(item => {
+                        const row = document.createElement("tr");
+
+                        const cartIdCell = document.createElement("td");
+                        cartIdCell.textContent = item.Cart_ID;
+                        row.appendChild(cartIdCell);
+
+                        const productIdCell = document.createElement("td");
+                        productIdCell.textContent = item.Product_ID;
+                        row.appendChild(productIdCell);
+
+                        const productNameCell = document.createElement("td");
+                        productNameCell.textContent = item.Product_Name ?? "";
+                        row.appendChild(productNameCell);
+
+                        const quantityCell = document.createElement("td");
+                        quantityCell.textContent = item.Billing_Products ?? "";
+                        row.appendChild(quantityCell);
+
+                        const priceCell = document.createElement("td");
+                        priceCell.textContent =
+                            "₹" + Number(item.Total_Price || 0).toFixed(2);
+                        row.appendChild(priceCell);
+
+                        const actionCell = document.createElement("td");
+                        const removeButton = document.createElement("button");
+
+                        removeButton.textContent = "Remove";
+                        removeButton.type = "button";
+
+                        removeButton.addEventListener("click", () => {
+                            removeCartItem(item.Cart_ID);
+                        });
+
+                        actionCell.appendChild(removeButton);
+                        row.appendChild(actionCell);
+
+                        table.appendChild(row);
+
+                        grandTotal += Number(item.Total_Price || 0);
+                    });
+
+                    document.getElementById("cartTotal").innerText =
+                        "Grand Total: ₹" + grandTotal.toFixed(2);
+                })
+                .catch(error => {
+                    console.error("Error loading cart:", error);
+                    alert("Unable to load your cart. Please try again.");
+                });
+        }
+
+
+        async function removeCartItem(cartId) {
+            const confirmed = window.confirm(
+                "Are you sure you want to remove this item from your cart?"
+            );
+
+            if (!confirmed) {
+                return;
+            }
+
+            const token = localStorage.getItem("token");
+
+            if (!token) {
+                alert("Your login token was not found. Please log in again.");
+                return;
+            }
+
+            try {
+                const response = await fetch(
+                    "/cart/" + encodeURIComponent(cartId),
+                    {
+                        method: "DELETE",
+                        headers: {
+                            Authorization: `Bearer ${token}`
+                        }
+                    }
+                );
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    alert(data.message || "Failed to remove the item.");
+                    return;
+                }
+
+                alert(data.message || "Item removed successfully.");
+
+                // Reload the cart to display the updated items and total.
+                loadCart();
+
+            } catch (error) {
+                console.error("Error removing cart item:", error);
+                alert("Unable to connect to the server. Please try again.");
+            }
+        }
+
+
+
+
+
+
+        /* =========================================
+           INITIAL LOAD
+        ========================================= */
+
+        loadProducts();
+
+
+    </script>
+
+
+</body>
+
+</html>

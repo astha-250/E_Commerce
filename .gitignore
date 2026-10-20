@@ -1,0 +1,11 @@
+# Ignore installed Node.js dependencies
+node_modules/
+
+# Ignore environment variables and database credentials
+.env
+
+# Ignore the local database configuration backup
+db.backup.js
+
+#Ignore the local server configuration backup
+server.backup.js
